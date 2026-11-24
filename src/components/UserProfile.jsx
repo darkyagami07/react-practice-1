@@ -1,15 +1,21 @@
 /**
  * Componente Presentacional: UserProfile
  * Responsabilidad única: Mostrar la tarjeta de perfil de un usuario.
- * Recibe props: name, role, avatarUrl
+ * Recibe props: name, role, avatarUrl, propBio, isOnline
  */
-export function UserProfile({ name, role, avatarUrl }) {
+export function UserProfile({ name, role, avatarUrl, propBio, isOnline }) {
     return (
         <div className="user-profile-card" style={styles.card}>
             <img src={avatarUrl} alt={`Avatar de ${name}`} style={styles.avatar} />
             <div style={styles.info}>
                 <h3 style={styles.name}>{name}</h3>
                 <p style={styles.role}>{role}</p>
+                {propBio ? <p style={styles.bio}>{propBio}</p> : <p style={styles.bio}>No hay biografía disponible.</p>}
+                {isOnline !== undefined && (
+                    <p style={{ ...styles.bio, color: isOnline ? 'green' : 'red' }}>
+                        {isOnline ? '🟢 En línea' : '🔴 Desconectado'}
+                    </p>
+                )}
             </div>
         </div>
     );
@@ -47,4 +53,8 @@ const styles = {
         color: '#9ca3af',
         fontSize: '0.9rem',
     },
+    bio: {
+        margin: '8px 0 0 0',
+        fontSize: '0.9rem',
+    }
 };
